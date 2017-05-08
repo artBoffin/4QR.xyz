@@ -45,7 +45,7 @@ function encodeAddress() {
             break;
         }
     }
-    if (selectedLib != "?") {
+    if (selectedLib != "r/?") {
         var pako = window.pako;
         var compressed = btoa(pako.deflate(inCode, {
             to: 'string'
@@ -53,7 +53,7 @@ function encodeAddress() {
         compressed = compressed.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=/g, '');
         var addr = "https://4QR.xyz/" + selectedLib + compressed;
     } else {
-        var addr = "https://4QR.xyz/?" + encodeURIComponent(btoa(inCode));
+        var addr = "https://4QR.xyz/r/?" + encodeURIComponent(btoa(inCode));
     }
     return addr;
 }
@@ -123,7 +123,7 @@ function run() {
         <input type="radio" ; name="library" ; value="c/?" ; checked="checked" ;>Compressed (default)</label><a href="http://reference.4QR.xyz/#com"> ?</a>
     <br/>
     <label>
-        <input type="radio" ; name="library" ; value="?" ;>No compression</label><a href="http://reference.4QR.xyz/#noc"> ?</a>
+        <input type="radio" ; name="library" ; value="r/?" ;>No compression</label><a href="http://reference.4QR.xyz/#noc"> ?</a>
     <br/>
     <p>Include library wrapper (default compressed):</p>
     <label>
