@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>4QR.xyz reference</title>
+</head>
+
+<body>
+    <h1>4QR.xyz Refrence</h1>
+    <p>Refrence page for 4QR.xyz</p>
+    <p><a href="http://about.4QR.xyz">About</a> this site.</p>
+    <p>Please report any issues or suggestions on <a href="https://github.com/artBoffin/4QR.xyz/issues">GitHub</a></p>
+    <br/>
+    <h2>--- Encoding /decoding scheme ---</h2>
+    <br/>
+    <br/>
+    <a name="noc"></a>
+    <h3>No Compression<br/>
+https://4QR.xyz/?</h3>
+    <b>Encoding:</b>
+    <!-- HTML generated using hilite.me -->
+    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">var</span> URL <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;https://4QR.xyz/?&quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">encodeURIComponent</span>(btoa(<b>USER CODE HERE</b>));
+</pre></div>
+    <br/>
+    <b>Decoding:</b>
+    <!-- HTML generated using hilite.me -->
+    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007020">document</span>.write(atob(<span style="color: #007020">decodeURIComponent</span>(<span style="color: #007020">window</span>.location.search.substring(<span style="color: #0000DD; font-weight: bold">1</span>))));
+</pre></div>
+    <p>Or to include support for URL safe base64 as per <a href="https://en.wikipedia.org/wiki/Base64#RFC_4648">RFC 4648</a>.</p>
+    <!-- HTML generated using hilite.me -->
+    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007020">document</span>.write(atob(<span style="color: #007020">decodeURIComponent</span>(<span style="color: #007020">window</span>.location.search.substring(<span style="color: #0000DD; font-weight: bold">1</span>).replace(<span style="color: #000000; background-color: #fff0ff">/-/g</span>,<span style="background-color: #fff0f0">&#39;\+&#39;</span>).replace(<span style="color: #000000; background-color: #fff0ff">/_/g</span>,<span style="background-color: #fff0f0">&#39;\/&#39;</span>))));
+</pre></div>
+    <br/>
+    <hr>
+    <br/>
+    <br/>
+    <a name="com"></a>
+    <h3>Compression<br/>
+https://4QR.xyz/c/?</h3>
+    <p>Add support for unicode encoding.
+        <br/> Uses <a href="https://github.com/nodeca/pako">pako</a> for zlib type compression. Sould be compatible with deflate / inflate.</p>
+    <b>Encoding:</b>
+    <!-- HTML generated using hilite.me -->
+    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">var</span> pako <span style="color: #333333">=</span> <span style="color: #007020">window</span>.pako;
+<span style="color: #008800; font-weight: bold">var</span> compressed <span style="color: #333333">=</span> btoa(pako.deflate(<b>USER CODE HERE</b>, { to<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;string&#39;</span> }));
+compressed <span style="color: #333333">=</span> compressed.replace(<span style="color: #000000; background-color: #fff0ff">/\+/g</span>, <span style="background-color: #fff0f0">&#39;-&#39;</span>).replace(<span style="color: #000000; background-color: #fff0ff">/\//g</span>, <span style="background-color: #fff0f0">&#39;_&#39;</span>).replace(<span style="color: #000000; background-color: #fff0ff">/\=/g</span>, <span style="background-color: #fff0f0">&#39;&#39;</span>);
+<span style="color: #008800; font-weight: bold">var</span> URL <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;https://4QR.xyz/c/?&quot;</span> <span style="color: #333333">+</span> compressed;
+</pre></div>
+    <br/>
+    <b>Decoding:</b>
+    <!-- HTML generated using hilite.me -->
+    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007020">document</span>.write(<span style="color: #007020">window</span>.pako.inflate(atob(<span style="color: #007020">window</span>.location.search.substring(<span style="color: #0000DD; font-weight: bold">1</span>).replace(<span style="color: #000000; background-color: #fff0ff">/-/g</span>,<span style="background-color: #fff0f0">&#39;\+&#39;</span>).replace(<span style="color: #000000; background-color: #fff0ff">/_/g</span>,<span style="background-color: #fff0f0">&#39;\/&#39;</span>)),{to<span style="color: #333333">:</span><span style="background-color: #fff0f0">&#39;string&#39;</span>}));
+</pre></div>
+    <hr>
+    <br/>
+    <br/>
+    <h2>--- Library wrappers ---</h2>
+    <br/>
+    <p>Library wrappers are provided for some major libraries and formats to save URL size.</p>
+    <br/>
+    <a name="p5"></a>
+    <h3>p5.js<br/>
+https://4QR.xyz/p5/V#/?</h3>
+    <a href="https://p5js.org/">p5.js home page</a>
+    <br/>
+    <a href="https://github.com/processing/p5.js">p5.js GitHub page</a>
+    <br/>
+    <br/>
+    <b>Wrapper code:</b>
+    <!-- HTML generated using hilite.me -->
+    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;html&gt;</span>
+
+<span style="color: #007700">&lt;head&gt;</span>
+    <span style="color: #007700">&lt;meta</span> <span style="color: #0000CC">charset=</span><span style="background-color: #fff0f0">&quot;UTF-8&quot;</span><span style="color: #007700">&gt;</span>
+    <span style="color: #007700">&lt;script </span><span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&quot;https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.8/p5.min.js&quot;</span><span style="color: #007700">&gt;&lt;/script&gt;</span>
+    <span style="color: #007700">&lt;script </span><span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&quot;https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.8/addons/p5.dom.min.js&quot;</span><span style="color: #007700">&gt;&lt;/script&gt;</span>
+    <span style="color: #007700">&lt;script </span><span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&quot;https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.8/addons/p5.sound.min.js&quot;</span><span style="color: #007700">&gt;&lt;/script&gt;</span>
+    <span style="color: #007700">&lt;script&gt;</span>
+<b>USER CODE HERE</b>
+    <span style="color: #007700">&lt;/script&gt;</span>
+    <span style="color: #007700">&lt;style&gt;</span>
+    <span style="color: #007700">body</span> {
+        <span style="color: #008800; font-weight: bold">padding</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">0</span>;
+        <span style="color: #008800; font-weight: bold">margin</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">0</span>;
+    }
+    <span style="color: #007700">&lt;/style&gt;</span>
+<span style="color: #007700">&lt;/head&gt;</span>
+
+<span style="color: #007700">&lt;body&gt;&lt;/body&gt;</span>
+
+<span style="color: #007700">&lt;/html&gt;</span>
+</pre></div>
+    <br/>
+    <b>Example code:</b>
+    <!-- HTML generated using hilite.me -->
+    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">function</span> setup() {
+
+}
+
+<span style="color: #008800; font-weight: bold">function</span> draw() {
+  ellipse(<span style="color: #0000DD; font-weight: bold">50</span>, <span style="color: #0000DD; font-weight: bold">50</span>, <span style="color: #0000DD; font-weight: bold">80</span>, <span style="color: #0000DD; font-weight: bold">80</span>);
+}
+</pre></div>
+    <br/>
+    <b>Generated URL:</b>
+    <a href="https://4qr.xyz/p5/.0/?eJxLK81LLsnMz1MoTi0pLdDQVKjm4qrl4kqDCacUJZaDRRUUUnNyMguKUzVMDXQUQNgCjDWtuWoBEDwUMg">https://4qr.xyz/p5/.0/?eJxLK81LLsnMz1MoTi0pLdDQVKjm4qrl4kqDCacUJZaDRRUUUnNyMguKUzVMDXQUQNgCjDWtuWoBEDwUMg</a>
+    <br/>
+    <hr>
+    <br/>
+    <br/>
+    <a name="th"></a>
+    <h3>three.js<br/>
+https://4QR.xyz/th/V#/?</h3>
+    <a href="https://threejs.org/">three.js home page</a>
+    <br/>
+    <a href="https://github.com/mrdoob/three.js/">three.js GitHub page</a>
+    <br/>
+    <br/>
+    <b>Wrapper code:</b>
+    <!-- HTML generated using hilite.me -->
+    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;!DOCTYPE HTML&gt;</span>
+<span style="color: #007700">&lt;html&gt;</span>
+<span style="color: #007700">&lt;script </span><span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&quot;https://cdnjs.cloudflare.com/ajax/libs/three.js/85/three.min.js&quot;</span><span style="color: #007700">&gt;&lt;/script&gt;</span>
+<span style="color: #007700">&lt;script </span><span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&quot;https://cdnjs.cloudflare.com/ajax/libs/three.js/85/three.module.js&quot;</span><span style="color: #007700">&gt;&lt;/script&gt;</span>
+
+<span style="color: #007700">&lt;head&gt;</span>
+    <span style="color: #007700">&lt;meta</span> <span style="color: #0000CC">charset=</span><span style="background-color: #fff0f0">&quot;utf-8&quot;</span><span style="color: #007700">&gt;</span>
+    <span style="color: #007700">&lt;style </span><span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text/css&quot;</span><span style="color: #007700">&gt;</span>
+    <span style="color: #007700">body</span> {
+        <span style="color: #008800; font-weight: bold">margin</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">0px</span>;
+        <span style="color: #008800; font-weight: bold">overflow</span><span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">hidden</span>
+    }
+    
+    <span style="color: #007700">canvas</span> {
+        <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">100</span><span style="color: #333333">%</span>;
+        <span style="color: #008800; font-weight: bold">height</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">100</span><span style="color: #333333">%</span>
+    }
+    <span style="color: #007700">&lt;/style&gt;</span>
+<span style="color: #007700">&lt;/head&gt;</span>
+
+<span style="color: #007700">&lt;body&gt;</span>
+    <span style="color: #007700">&lt;script&gt;</span>
+<b>USER CODE HERE</b>
+    <span style="color: #007700">&lt;/script&gt;</span>
+<span style="color: #007700">&lt;/body&gt;</span>
+
+<span style="color: #007700">&lt;/html&gt;</span>
+</pre></div>
+    <br/>
+    <b>Example code:</b>
+    <!-- HTML generated using hilite.me -->
+    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">var</span> scene <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> THREE.Scene();
+<span style="color: #008800; font-weight: bold">var</span> camera <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> THREE.PerspectiveCamera(<span style="color: #0000DD; font-weight: bold">75</span>, <span style="color: #007020">window</span>.innerWidth <span style="color: #333333">/</span> <span style="color: #007020">window</span>.innerHeight, <span style="color: #6600EE; font-weight: bold">0.1</span>, <span style="color: #0000DD; font-weight: bold">1000</span>);
+camera.position.z <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">4</span>;
+
+<span style="color: #008800; font-weight: bold">var</span> renderer <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> THREE.WebGLRenderer({
+    antialias<span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">true</span>
+});
+
+renderer.setClearColor(<span style="background-color: #fff0f0">&quot;#000000&quot;</span>);
+
+renderer.setSize(<span style="color: #007020">window</span>.innerWidth, <span style="color: #007020">window</span>.innerHeight);
+
+<span style="color: #007020">document</span>.body.appendChild(renderer.domElement);
+
+<span style="color: #008800; font-weight: bold">var</span> geometry <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> THREE.BoxGeometry(<span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+<span style="color: #008800; font-weight: bold">var</span> material <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> THREE.MeshBasicMaterial({
+    color<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;#433F81&quot;</span>
+});
+<span style="color: #008800; font-weight: bold">var</span> cube <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> THREE.Mesh(geometry, material);
+
+scene.add(cube);
+
+<span style="color: #008800; font-weight: bold">var</span> render <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">function</span>() {
+    requestAnimationFrame(render);
+
+    cube.rotation.x <span style="color: #333333">+=</span> <span style="color: #6600EE; font-weight: bold">0.01</span>;
+    cube.rotation.y <span style="color: #333333">+=</span> <span style="color: #6600EE; font-weight: bold">0.01</span>;
+
+    renderer.render(scene, camera);
+};
+
+render();
+</pre></div>
+    <p>From <a href="https://medium.com/@necsoft/three-js-101-hello-world-part-1-443207b1ebe1">here</a>.</p>
+    <b>Generated URL:</b>
+    <a href="https://4QR.xyz/th/BN/?eJxtUstuwjAQvOcrLLg4auQmgqoViEOJeByKVJVKnE28JZYSO3UcXhX_XtsYqhSsHKKd3Zmd3d1SheoMBKARErBDn_OPyYQsbQSHw2Br4IyWoGgLfwdVV5BpvoXUofj5KUI7LpjcES4EqBVnOkePrdgc-CbXEYpJEqEkjmMjcCYnlay55lKQo9HpDwMnrEAwUKBa0itYz94-PIJ_AmQeFZrTgtN6gLRqIDgZ4uBSTWrQaQFUpbKQCne6sXud_zlLfgR8YyG648BWMpk1JQhN1pIdCK0qw5TmvGD4yslkOSnAJoXe0AZkCVodWobGcj_zcWznYj4_-JJqUMZYK30BdT6mNc8WHvUzyKy7Aep0-73e9CXpuCG49TVruGHAl1aiq4pt0l0CoYxhWxW29mA4vhqR2S3hEJ1FFXw3UOtXwQ2LAabKrNNPwFa7xgwTUVK7BLJHDyNzAHEyvAMe_kBP70d5_sGuvcgfpOE_XVdobvUXVk3msQ">https://4QR.xyz/th/BN/?eJxtUstuwjAQvOcrLLg4auQmgqoViEOJeByKVJVKnE28JZYSO3UcXhX_XtsYqhSsHKKd3Zmd3d1SheoMBKARErBDn_OPyYQsbQSHw2Br4IyWoGgLfwdVV5BpvoXUofj5KUI7LpjcES4EqBVnOkePrdgc-CbXEYpJEqEkjmMjcCYnlay55lKQo9HpDwMnrEAwUKBa0itYz94-PIJ_AmQeFZrTgtN6gLRqIDgZ4uBSTWrQaQFUpbKQCne6sXud_zlLfgR8YyG648BWMpk1JQhN1pIdCK0qw5TmvGD4yslkOSnAJoXe0AZkCVodWobGcj_zcWznYj4_-JJqUMZYK30BdT6mNc8WHvUzyKy7Aep0-73e9CXpuCG49TVruGHAl1aiq4pt0l0CoYxhWxW29mA4vhqR2S3hEJ1FFXw3UOtXwQ2LAabKrNNPwFa7xgwTUVK7BLJHDyNzAHEyvAMe_kBP70d5_sGuvcgfpOE_XVdobvUXVk3msQ</a>
+    <hr>
+    <br/>
+    <br/>
+    <a name="pa"></a>
+    <h3>paper.js<br/>
+https://4QR.xyz/pa/V#/?</h3>
+    <a href="http://paperjs.org/">paper.js home page</a>
+    <br/>
+    <a href="https://github.com/paperjs/paper.js">paper.js GitHub page</a>
+    <br/>
+    <br/>
+    <b>Wrapper code:</b>
+    <!-- HTML generated using hilite.me -->
+    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #007700">&lt;html&gt;</span>
+
+<span style="color: #007700">&lt;head&gt;</span>
+    <span style="color: #007700">&lt;script </span><span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&quot;https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.3/paper-full.min.js&quot;</span><span style="color: #007700">&gt;&lt;/script&gt;</span>
+    <span style="color: #007700">&lt;script </span><span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text/paperscript&quot;</span> <span style="color: #0000CC">canvas=</span><span style="background-color: #fff0f0">&quot;myCanvas&quot;</span><span style="color: #007700">&gt;</span>
+<b>USER CODE HERE</b>
+    <span style="color: #007700">&lt;/script&gt;</span>
+<span style="color: #007700">&lt;/head&gt;</span>
+
+<span style="color: #007700">&lt;body&gt;</span>
+    <span style="color: #007700">&lt;canvas</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;myCanvas&quot;</span> <span style="color: #0000CC">resize</span><span style="color: #007700">&gt;&lt;/canvas&gt;</span>
+<span style="color: #007700">&lt;/body&gt;</span>
+
+<span style="color: #007700">&lt;/html&gt;</span>
+</pre></div>
+    <br/>
+    <b>Example code:</b>
+    <!-- HTML generated using hilite.me -->
+    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">var</span> path <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> Path();
+path.strokeColor <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;black&#39;</span>;
+<span style="color: #008800; font-weight: bold">var</span> start <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> Point(<span style="color: #0000DD; font-weight: bold">100</span>, <span style="color: #0000DD; font-weight: bold">100</span>);
+path.moveTo(start);
+path.lineTo(start <span style="color: #333333">+</span> [ <span style="color: #0000DD; font-weight: bold">100</span>, <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">50</span> ]);
+</pre></div>
+    <br/>
+    <b>Generated URL:</b>
+    <a href="https://4QR.xyz/pa/.q/?eJwrSyxSKEgsyVCwVchLLVcIADI1NK25QEJ6xSVF-dmpzvk5-UVAafWknMTkbHVrrjKgluKSxKISmJ78zLwSDUMDAx0FIAHTnJtflhqSrwFWCBPLycyDiyloK0QrgDXpmhooxGpaAwAq3CsX">https://4QR.xyz/pa/.q/?eJwrSyxSKEgsyVCwVchLLVcIADI1NK25QEJ6xSVF-dmpzvk5-UVAafWknMTkbHVrrjKgluKSxKISmJ78zLwSDUMDAx0FIAHTnJtflhqSrwFWCBPLycyDiyloK0QrgDXpmhooxGpaAwAq3CsX</a>
+    <hr>
+    <br/>
+    <br/>
+    <a name="dw"></a>
+    <h3>Dwitter<br/>
+https://4QR.xyz/dw/?</h3>
+    <a href="https://www.dwitter.net/">Dwitter home page</a>
+    <br/>
+    <a href="https://github.com/lionleaf/dwitter">Dwitter GitHub page</a>
+    <br/>
+    <br/>
+    <b>Wrapper code:</b>
+    <!-- HTML generated using hilite.me -->
+    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #007700">&lt;html&gt;</span>
+<span style="color: #007700">&lt;style&gt;</span>
+<span style="color: #007700">body</span> {
+    <span style="color: #008800; font-weight: bold">padding</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">0</span>;
+    <span style="color: #008800; font-weight: bold">margin</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">0</span>;
+    <span style="color: #008800; font-weight: bold">overflow</span><span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">hidden</span>;
+}
+
+<span style="color: #007700">canvas</span> {
+    <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">100</span><span style="color: #333333">%</span>
+}
+<span style="color: #007700">&lt;/style&gt;</span>
+<span style="color: #007700">&lt;canvas</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">c</span><span style="color: #007700">&gt;&lt;/canvas&gt;</span>
+<span style="color: #007700">&lt;script&gt;</span>
+c.width <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1920</span>;
+c.height <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1080</span>;
+<span style="color: #008800; font-weight: bold">var</span> S <span style="color: #333333">=</span> <span style="color: #007020">Math</span>.sin;
+<span style="color: #008800; font-weight: bold">var</span> C <span style="color: #333333">=</span> <span style="color: #007020">Math</span>.cos;
+<span style="color: #008800; font-weight: bold">var</span> T <span style="color: #333333">=</span> <span style="color: #007020">Math</span>.tan;
+
+<span style="color: #008800; font-weight: bold">function</span> R(r, g, b, a) {
+    a <span style="color: #333333">=</span> a <span style="color: #333333">===</span> <span style="color: #008800; font-weight: bold">undefined</span> <span style="color: #333333">?</span> <span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">:</span> a;
+    <span style="color: #008800; font-weight: bold">return</span> <span style="background-color: #fff0f0">&quot;rgba(&quot;</span> <span style="color: #333333">+</span> (r <span style="color: #333333">|</span> <span style="color: #0000DD; font-weight: bold">0</span>) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;,&quot;</span> <span style="color: #333333">+</span> (g <span style="color: #333333">|</span> <span style="color: #0000DD; font-weight: bold">0</span>) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;,&quot;</span> <span style="color: #333333">+</span> (b <span style="color: #333333">|</span> <span style="color: #0000DD; font-weight: bold">0</span>) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;,&quot;</span> <span style="color: #333333">+</span> a <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;)&quot;</span>;
+};
+<span style="color: #008800; font-weight: bold">var</span> x <span style="color: #333333">=</span> c.getContext(<span style="background-color: #fff0f0">&quot;2d&quot;</span>);
+<span style="color: #008800; font-weight: bold">var</span> time <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+<span style="color: #008800; font-weight: bold">var</span> frame <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+
+<span style="color: #008800; font-weight: bold">function</span> u(t) {
+<b>USER CODE HERE</b>
+}
+
+<span style="color: #008800; font-weight: bold">function</span> loop() {
+    u(time);
+    requestAnimationFrame(loop);
+    time <span style="color: #333333">=</span> frame <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">60</span>;
+    <span style="color: #008800; font-weight: bold">if</span> (time <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">60</span> <span style="color: #333333">|</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #333333">==</span> frame <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+        time <span style="color: #333333">+=</span> <span style="color: #6600EE; font-weight: bold">0.000001</span>;
+    }
+    frame<span style="color: #333333">++</span>;
+}
+loop();
+<span style="color: #007700">&lt;/script&gt;</span>
+
+<span style="color: #007700">&lt;/html&gt;</span>
+</pre></div>
+    <br>
+    <b>Example code:</b>
+    <!-- HTML generated using hilite.me -->
+    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">c.width<span style="color: #333333">^=</span><span style="color: #0000DD; font-weight: bold">0</span>;<span style="color: #008800; font-weight: bold">for</span>(i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">9</span>;i<span style="color: #333333">&lt;</span><span style="color: #0000DD; font-weight: bold">2</span>e3;i<span style="color: #333333">+=</span><span style="color: #0000DD; font-weight: bold">2</span>)s<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">3</span><span style="color: #333333">/</span>(<span style="color: #6600EE; font-weight: bold">9.1</span><span style="color: #333333">-</span>(t<span style="color: #333333">+</span>i<span style="color: #333333">/</span><span style="color: #0000DD; font-weight: bold">99</span>)<span style="color: #333333">%</span><span style="color: #0000DD; font-weight: bold">9</span>),x.beginPath(),j<span style="color: #333333">=</span>i<span style="color: #333333">*</span><span style="color: #0000DD; font-weight: bold">7</span><span style="color: #333333">+</span>S(i<span style="color: #333333">*</span><span style="color: #0000DD; font-weight: bold">4</span><span style="color: #333333">+</span>t<span style="color: #333333">+</span>S(t)),x.lineWidth<span style="color: #333333">=</span>s<span style="color: #333333">*</span>s,x.arc(<span style="color: #0000DD; font-weight: bold">960</span>,<span style="color: #0000DD; font-weight: bold">540</span>,s<span style="color: #333333">*</span><span style="color: #0000DD; font-weight: bold">49</span>,j,j<span style="color: #333333">+</span>.<span style="color: #0000DD; font-weight: bold">6</span>),x.stroke()
+</pre></div>
+    <p>From <a href="https://www.dwitter.net/d/1231">here</a>.</p>
+    <b>Generated URL:</b><a href="https://4QR.xyz/dw/?eJwVjMsKwjAQAL9G2DxMYxsrS8w_CB68CbXGdqO0kCzo59uchoFhRvOlJ8_3YP1rzUABPZ3b2HlSoRUldA2gOeyBFTWIYodC_8wjTrRcBp5B6BRIntQVSDrFG1nU4kNLvNVxKLJsPuQRsLf66Kwu0qFOOinT17RwXt8RxB_F-CeR">https://4QR.xyz/dw/?eJwVjMsKwjAQAL9G2DxMYxsrS8w_CB68CbXGdqO0kCzo59uchoFhRvOlJ8_3YP1rzUABPZ3b2HlSoRUldA2gOeyBFTWIYodC_8wjTrRcBp5B6BRIntQVSDrFG1nU4kNLvNVxKLJsPuQRsLf66Kwu0qFOOinT17RwXt8RxB_F-CeR</a>
+    <hr>
+</body>
+
+</html>

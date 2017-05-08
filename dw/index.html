@@ -1,0 +1,3 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/1.0.5/pako_inflate.min.js"></script>
+<script>document.write("<!DOCTYPE html><html><style>body{padding:0;margin:0;overflow:hidden}canvas{width:100%}<\/style><canvas id=c><\/canvas><script>c.width = 1920;c.height = 1080;var S=Math.sin,C=Math.cos,T=Math.tan;function R(r,g,b,a) {a=a===undefined?1:a;return \"rgba(\"+(r|0)+\",\"+(g|0)+\",\"+(b|0)+\",\"+a+\")\";};var x = c.getContext(\"2d\");var time = 0;var frame = 0;function u(t) {"+window.pako.inflate(atob(window.location.search.substring(1).replace(/-/g,'\+').replace(/_/g,'\/')),{to:'string'})+"}function loop(){u(time);requestAnimationFrame(loop);time=frame\/60;if(time*60|0==frame-1){time+=0.000001;}frame++;}loop();<\/script><\/html>")
+</script>
