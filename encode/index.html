@@ -51,9 +51,9 @@ function encodeAddress() {
             to: 'string'
         }));
         compressed = compressed.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=/g, '');
-        var addr = "https://www.4QR.xyz/" + selectedLib + compressed;
+        var addr = "https://4QR.xyz/" + selectedLib + compressed;
     } else {
-        var addr = "https://www.4QR.xyz/r/?" + encodeURIComponent(btoa(inCode));
+        var addr = "https://4QR.xyz/r/?" + encodeURIComponent(btoa(inCode));
     }
     return addr;
 }
