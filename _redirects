@@ -1,5 +1,2 @@
-http://encode.4qr.xyz http://www.4qr.xyz/encode 200
-http://about.4qr.xyz http://www.4qr.xyz/about 200
-http://reference.4qr.xyz http://www.4qr.xyz/reference 200
-http://gallery.4qr.xyz http://www.4qr.xyz/gallery 200
-http://www.4qr.xyz/ http://www.4qr.xyz/about 200
+http://www.4qr.xyz/ http://www.4qr.xyz/about 301
+/    /about  404
