@@ -92,9 +92,8 @@ function makeLink(input) {
 }
 
 function makeTinyUrl(input) {
-    var urlin = "<a href=\""+input+"\" target=\"_blank\">Make tinyurl.com link</a>";
+    var urlin = "<a href=\"http:\/\/tinyurl.com\/create.php?url="+input+"\" target=\"_blank\">Make tinyurl.com link</a>";
     document.querySelector('.tinyurl').innerHTML = urlin;
-
 }
 
 function run() {
