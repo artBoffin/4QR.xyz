@@ -16,7 +16,7 @@
     border: 1px solid lightgray;
     margin: auto;
     height: 200px;
-    width: 80%;
+    width: 99%;
 }
 
 .scrollmargin {
@@ -88,7 +88,9 @@
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/php");
     editor.setAutoScrollEditorIntoView(true);
-    editor.setOption("minLines", 2);
+    editor.setOption("minLines", 10);
+    editor.setOption("maxLines", 50);
+    editor.resize(true);
 
     function load() {
         gapi.client.setApiKey('AIzaSyBheyryTIUnSk0-MnVrHtjwdqEM8xbfBRs');
