@@ -15,8 +15,8 @@
 .ace_editor {
     border: 1px solid lightgray;
     margin: auto;
-    height: 200px;
-    width: 99%;
+    width: 60%;
+    text-align: left;
 }
 
 .scrollmargin {
@@ -86,11 +86,12 @@
     <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/php");
+    editor.getSession().setMode("ace/mode/html");
     editor.setAutoScrollEditorIntoView(true);
+    editor.resize(true);
     editor.setOption("minLines", 10);
     editor.setOption("maxLines", 50);
-    editor.resize(true);
+
 
     function load() {
         gapi.client.setApiKey('AIzaSyBheyryTIUnSk0-MnVrHtjwdqEM8xbfBRs');
