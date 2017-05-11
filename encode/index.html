@@ -27,34 +27,34 @@
     <a href="https://www.4QR.xyz/about/">About this website</a>
     <br/>
     <p>Enter in code below, then click encode button.</p>
-    <div id="editor" ; style="display: block; margin-left:5px; height: auto ; width: 80%">
+    <div id="editor" style="display: block; margin-left:5px; height: auto; width: 80%">
     </div>
     <br/>
     <p>Options:</p>
     <label>
-        <input type="checkbox" ; id="qr" ;>Generate QR codes</label>
+        <input type="checkbox" id="qr" ;>Generate QR codes</label>
     <br/>
     <label>
-        <input type="radio" ; name="library" ; value="c/?" ; checked="checked" ;>Compressed (default)</label><a href="https://www.4QR.xyz/reference/#com"> ?</a>
+        <input type="radio" name="library" value="c/?" ; checked="checked">Compressed (default)</label><a href="https://www.4QR.xyz/reference/#com"> ?</a>
     <br/>
     <label>
-        <input type="radio" ; name="library" ; value="r/?" ;>No compression</label><a href="https://www.4QR.xyz/reference/#noc"> ?</a>
+        <input type="radio" name="library"  value="r/?">No compression</label><a href="https://www.4QR.xyz/reference/#noc"> ?</a>
     <br/>
     <p>Include library wrapper (default compressed):</p>
     <label>
-        <input type="radio" ; name="library" ; value="p5/1n/?" ;>P5.js 0.5.9</label><a href="https://www.4QR.xyz/reference/#p5"> ?</a>
+        <input type="radio"  name="library"  value="p5/1n/?">P5.js 0.5.9</label><a href="https://www.4QR.xyz/reference/#p5"> ?</a>
     <br/>
     <label>
-        <input type="radio" ; name="library" ; value="p5/1m/?" ;>P5.js 0.5.8</label><a href="https://www.4QR.xyz/reference/#p5"> ?</a>
+        <input type="radio"  name="library"  value="p5/1m/?">P5.js 0.5.8</label><a href="https://www.4QR.xyz/reference/#p5"> ?</a>
     <br/>
     <label>
-        <input type="radio" ; name="library" ; value="pa/1a/?" ;>paper.js v0.11.3</label><a href="https://www.4QR.xyz/reference/#pa"> ?</a>
+        <input type="radio"  name="library"  value="pa/1a/?">paper.js v0.11.3</label><a href="https://www.4QR.xyz/reference/#pa"> ?</a>
     <br/>
     <label>
-        <input type="radio" ; name="library" ; value="th/2d/?" ;>three.js v85</label><a href="https://www.4QR.xyz/reference/#th"> ?</a>
+        <input type="radio"  name="library"  value="th/2d/?">three.js v85</label><a href="https://www.4QR.xyz/reference/#th"> ?</a>
     <br/>
     <label>
-        <input type="radio" ; name="library" ; value="dw/?" ;>Dwitter</label><a href="https://www.4QR.xyz/reference/#dw"> ?</a>
+        <input type="radio"  name="library"  value="dw/?">Dwitter</label><a href="https://www.4QR.xyz/reference/#dw"> ?</a>
     <br/>
     <br/>
     <input type="submit" name="button" id="encode" onclick="run()" value="Encode" />
@@ -62,7 +62,7 @@
     <hr>
     <br/>
     <br/>
-    <div class="results" ; style="font-size:180%" ;></div>
+    <div class="results"  style="font-size:180%"></div>
     <br/>
     <br/>
     <div id="urlShort"></div>
@@ -71,15 +71,15 @@
     <div class="tinyurl" ;></div>
     <br/>
     <br/>
-    <div class="qrcodeLText" ; style="font-size:180%" ;></div>
+    <div class="qrcodeLText"  style="font-size:180%"></div>
     <br/>
     <div id="qrcodeL" style="display: block; width:640px; height:640px; margin-left:5px"></div>
     <br/>
     <br/>
-    <div class="qrcodeSText" ; style="font-size:180%" ;></div>
+    <div class="qrcodeSText"  style="font-size:180%"></div>
     <br/>
     <br/>
-    <div id="qrcodeS" style="display: block; width:640px; height:640px; margin-left:5px; "></div>
+    <div id="qrcodeS" style="display: block; width:640px; height:640px; margin-left:5px;"></div>
     <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
