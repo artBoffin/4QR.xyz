@@ -3,116 +3,35 @@
 <html>
 
 <head>
-<title>4QR.xyz encoder</title>
+    <title>4QR.xyz encoder</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
     <script src="https://apis.google.com/js/client.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/1.0.5/pako_deflate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
 </head>
-<script>
-function load() {
-    gapi.client.setApiKey('AIzaSyBheyryTIUnSk0-MnVrHtjwdqEM8xbfBRs');
-    gapi.client.load('urlshortener', 'v1', function() {});
-}
-window.onload = load;
-
-function makeShort(longUrl) {
-    var request = gapi.client.urlshortener.url.insert({
-        'resource': {
-            'longUrl': longUrl
-        }
-    });
-    request.execute(function(response) {
-
-        if (response.id != null) {
-            str = "<b>Long URL: </b><br/>" + longUrl + "<br>";
-            str += "<br/><b>goo.gl URL:</b></br><a href='" + response.id + "'>" + response.id + "</a><br>";
-            document.getElementById("urlShort").innerHTML = str;
-            if (document.getElementById("qr").checked) {
-                encodeQrS(response.id);
-            }
-        }
-    });
+<style type="text/css" media="screen">
+.ace_editor {
+    border: 1px solid lightgray;
+    margin: auto;
+    height: 200px;
+    width: 80%;
 }
 
-function encodeAddress() {
-    var inCode = document.getElementById("textInput").value;
-    var radios = document.getElementsByName('library');
-    for (var i = 0, length = radios.length; i < length; i++) {
-        if (radios[i].checked) {
-            selectedLib = radios[i].value;
-            break;
-        }
-    }
-    if (selectedLib != "r/?") {
-        var pako = window.pako;
-        var compressed = btoa(pako.deflate(inCode, {
-            to: 'string'
-        }));
-        compressed = compressed.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=/g, '');
-        var addr = "https://4QR.xyz/" + selectedLib + compressed;
-    } else {
-        var addr = "https://4QR.xyz/r/?" + encodeURIComponent(btoa(inCode));
-    }
-    return addr;
+.scrollmargin {
+    height: 80px;
+    text-align: left;
 }
-
-function encodeQrL(input) {
-    var div = document.getElementById("qrcodeL");
-    while (div.firstChild) {
-        div.removeChild(div.firstChild);
-    }
-    jQuery('#qrcodeL').qrcode({
-        text: input,
-        width: 640,
-        height: 640,
-        correctLevel: 1
-    });
-    document.querySelector('.qrcodeLText').innerHTML = "Long URL QR";
-}
-
-function encodeQrS(input) {
-    var div = document.getElementById("qrcodeS");
-    while (div.firstChild) {
-        div.removeChild(div.firstChild);
-    }
-    jQuery('#qrcodeS').qrcode({
-        text: input,
-        width: 640,
-        height: 640,
-        correctLevel: 1
-    });
-    document.querySelector('.qrcodeSText').innerHTML = "goo.gl URL QR";
-}
-
-function makeLink(input) {
-    var urlin = "<a href=\""+input+"\" target=\"_blank\">Encoded URL link</a>";
-    document.querySelector('.results').innerHTML = urlin;
-}
-
-function makeTinyUrl(input) {
-    var urlin = "<a href=\"http:\/\/tinyurl.com\/create.php?url="+input+"\" target=\"_blank\">Make tinyurl.com link</a>";
-    document.querySelector('.tinyurl').innerHTML = urlin;
-}
-
-function run() {
-    var encodedAddress = encodeAddress();
-    makeLink(encodedAddress);
-    makeTinyUrl(encodedAddress);
-    if (document.getElementById("qr").checked) {
-        encodeQrL(encodedAddress);
-    }
-    makeShort(encodedAddress);
-}
-</script>
+</style>
 
 <body>
     <h1>Encoder for 4QR.xyz</h1>
     <a href="https://www.4QR.xyz/about/">About this website</a>
     <br/>
     <p>Enter in code below, then click encode button.</p>
-    <textarea name="text input" id="textInput" rows="20" cols="80"></textarea>
+    <div id="editor" ; height="auto" ; width="auto">
+    </div>
     <br/>
     <p>Options:</p>
     <label>
@@ -129,14 +48,11 @@ function run() {
         <input type="radio" ; name="library" ; value="p5/1m/?" ;>P5.js 0.5.8</label><a href="https://www.4QR.xyz/reference/#p5"> ?</a>
     <br/>
     <label>
-    <label>
         <input type="radio" ; name="library" ; value="p5/1n/?" ;>P5.js 0.5.9</label><a href="https://www.4QR.xyz/reference/#p5"> ?</a>
     <br/>
     <label>
-    <label>
         <input type="radio" ; name="library" ; value="pa/1a/?" ;>paper.js v0.11.3</label><a href="https://www.4QR.xyz/reference/#pa"> ?</a>
     <br/>
-    <label>
     <label>
         <input type="radio" ; name="library" ; value="th/2d/?" ;>three.js v85</label><a href="https://www.4QR.xyz/reference/#th"> ?</a>
     <br/>
@@ -167,5 +83,108 @@ function run() {
     <br/>
     <br/>
     <div id="qrcodeS" style="display: block; width:640px; height:640px; margin-left:5px; "></div>
+    <script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/php");
+    editor.setAutoScrollEditorIntoView(true);
+    editor.setOption("minLines", 2);
+
+    function load() {
+        gapi.client.setApiKey('AIzaSyBheyryTIUnSk0-MnVrHtjwdqEM8xbfBRs');
+        gapi.client.load('urlshortener', 'v1', function() {});
+    }
+    window.onload = load;
+
+    function makeShort(longUrl) {
+        var request = gapi.client.urlshortener.url.insert({
+            'resource': {
+                'longUrl': longUrl
+            }
+        });
+        request.execute(function(response) {
+
+            if (response.id != null) {
+                str = "<b>Long URL: </b><br/>" + longUrl + "<br>";
+                str += "<br/><b>goo.gl URL:</b></br><a href='" + response.id + "'>" + response.id + "</a><br>";
+                document.getElementById("urlShort").innerHTML = str;
+                if (document.getElementById("qr").checked) {
+                    encodeQrS(response.id);
+                }
+            }
+        });
+    }
+
+    function encodeAddress() {
+        var inCode = editor.getValue();
+        var radios = document.getElementsByName('library');
+        for (var i = 0, length = radios.length; i < length; i++) {
+            if (radios[i].checked) {
+                selectedLib = radios[i].value;
+                break;
+            }
+        }
+        if (selectedLib != "r/?") {
+            var pako = window.pako;
+            var compressed = btoa(pako.deflate(inCode, {
+                to: 'string'
+            }));
+            compressed = compressed.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=/g, '');
+            var addr = "https://4QR.xyz/" + selectedLib + compressed;
+        } else {
+            var addr = "https://4QR.xyz/r/?" + encodeURIComponent(btoa(inCode));
+        }
+        return addr;
+    }
+
+    function encodeQrL(input) {
+        var div = document.getElementById("qrcodeL");
+        while (div.firstChild) {
+            div.removeChild(div.firstChild);
+        }
+        jQuery('#qrcodeL').qrcode({
+            text: input,
+            width: 640,
+            height: 640,
+            correctLevel: 1
+        });
+        document.querySelector('.qrcodeLText').innerHTML = "Long URL QR";
+    }
+
+    function encodeQrS(input) {
+        var div = document.getElementById("qrcodeS");
+        while (div.firstChild) {
+            div.removeChild(div.firstChild);
+        }
+        jQuery('#qrcodeS').qrcode({
+            text: input,
+            width: 640,
+            height: 640,
+            correctLevel: 1
+        });
+        document.querySelector('.qrcodeSText').innerHTML = "goo.gl URL QR";
+    }
+
+    function makeLink(input) {
+        var urlin = "<a href=\"" + input + "\" target=\"_blank\">Encoded URL link</a>";
+        document.querySelector('.results').innerHTML = urlin;
+    }
+
+    function makeTinyUrl(input) {
+        var urlin = "<a href=\"http:\/\/tinyurl.com\/create.php?url=" + input + "\" target=\"_blank\">Make tinyurl.com link</a>";
+        document.querySelector('.tinyurl').innerHTML = urlin;
+    }
+
+    function run() {
+        var encodedAddress = encodeAddress();
+        makeLink(encodedAddress);
+        makeTinyUrl(encodedAddress);
+        if (document.getElementById("qr").checked) {
+            encodeQrL(encodedAddress);
+        }
+        makeShort(encodedAddress);
+    }
+    </script>
 </body>
+
 </html>
