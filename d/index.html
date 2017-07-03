@@ -1,0 +1,4 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/1.0.5/pako_inflate.min.js"></script>
+<script>
+document.write(window.pako.inflate(atob(window.location.hash.substring(1).replace(/-/g,'\+').replace(/_/g,'\/')),{to:'string'}));
+</script>
